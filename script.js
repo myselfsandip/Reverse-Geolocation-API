@@ -27,9 +27,10 @@ const whereAmI = function (lat, lng) {
         .catch(err => console.log(err))
 }
 
-
+//Vietnam
 whereAmI('22.572645','105.3188');
-whereAmI('31.224361','121.469170');
+//Alaska
+whereAmI('66.160507','-153.369141');
 
 function corDinateOutput(city, country) {
     const html = `
