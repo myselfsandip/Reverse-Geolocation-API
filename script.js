@@ -27,10 +27,10 @@ const whereAmI = function (lat, lng) {
         .catch(err => console.log(err))
 }
 
-//Vietnam
-whereAmI('22.572645','105.3188');
-//Alaska
-whereAmI('66.160507','-153.369141');
+//San Francisco, United States
+whereAmI('37.7749','-122.419');
+//Shanghai, China
+whereAmI('31.224361','121.469170');
 
 function corDinateOutput(city, country) {
     const html = `
