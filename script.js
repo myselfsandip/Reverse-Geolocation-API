@@ -1,5 +1,3 @@
-'use strict';
-
 const btn = document.querySelector('button');
 const container = document.querySelector('.container');
 const main = document.querySelector('main');
