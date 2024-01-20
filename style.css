@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Libre+Baskerville:wght@700&family=Montserrat:ital,wght@0,100;0,300;0,400;0,500;1,400&family=Open+Sans:wght@500;600;700&family=Poppins:wght@200;400;600&family=Rubik:ital,wght@1,900&family=Sacramento&family=Signika:wght@500&family=Ubuntu:wght@500&family=Work+Sans&display=swap');
 
-
 *{
     margin: 0;
     padding: 0;
@@ -10,6 +9,9 @@ html , body{
     height: 100%;
     width: 100%;
 }
+body{
+    background-color: seagreen;
+}
 main{
     font-family: poppins;
     min-height: 100vh;
@@ -17,11 +19,9 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: seagreen;
-    background-size: cover;
-    background-position: center;
     gap: 15px;
 }
+
 .country{
     position: relative;
     min-height: 400px;
@@ -39,6 +39,7 @@ main{
 .country img{
     width: 100%;
 }
+
 .neighbour{
     background: rgba(179, 98, 201, 0.613);
     backdrop-filter: blur(30px);
@@ -58,4 +59,15 @@ main{
 }
 .corDinateh2:nth-child(2){
     top: 80px;
+}
+
+@media (max-width:500px) {
+    main{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .container:nth-child(1){
+        margin-top: 160px;
+    }
 }

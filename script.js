@@ -1,3 +1,5 @@
+'use strict';
+
 const btn = document.querySelector('button');
 const container = document.querySelector('.container');
 const main = document.querySelector('main');
@@ -11,7 +13,6 @@ const apiKey = '5765f4d3ef42492ebdc6ef991ec17b2b';
 const whereAmI = function (lat, lng) {
     fetch(`https://api.opencagedata.com/geocode/v1/json?key=${apiKey}&q=${lat}+${lng}&pretty=1&no_annotations=1`)
         .then((responce) => {
-            console.log(responce);
             if (!responce.ok) throw new Error(`Problem with Geo-Coding ${responce.status}`);
             return responce.json();
         })
@@ -19,16 +20,13 @@ const whereAmI = function (lat, lng) {
             let geoLocationCountry = data.results[0].components.country;
             let geoLocationCity = data.results[0].components.city;
             console.log(`You are in ${geoLocationCity}, ${geoLocationCountry}`);
+            if(geoLocationCity === undefined) geoLocationCity = '🔎';
             corDinateOutput(geoLocationCity, geoLocationCountry)
             getCountryData(geoLocationCountry)
         })
         .catch(err => console.log(err))
 }
 
-//San Francisco, United States
-whereAmI('37.7749','-122.419');
-//Shanghai, China
-whereAmI('31.224361','121.469170');
 
 function corDinateOutput(city, country) {
     const html = `
@@ -42,7 +40,6 @@ const getCountryData = (country) => {
     fetch(`https://restcountries.com/v3.1/name/${country}?fullText=true`)
         .then(responce => responce.json())
         .then((data) => {
-            console.log(data[0]);
             renderCountry(data[0]);
             const neighbour = data[0].borders[0];
             if (!neighbour) throw new Error(`Neighbour not found ⭐⭐${neighbour.status}`);
@@ -82,7 +79,29 @@ function renderCountry(data, className ='') {
     container.insertAdjacentHTML('beforeend', html);
 }
 
+//This is how we can get our current position Coordinates in JavaScript
+//navigator.geolocation.getCurrentPosition((position) => console.log(position),(err) => console.error(err));
+
+const getPosition = function(){
+    return new Promise((res,rej)=>{
+        //navigator.geolocation.getCurrentPosition((position) => res(position),(err) => rej(err));
+        //WE can also do this thing like this
+        navigator.geolocation.getCurrentPosition(res,rej);
+    })
+}
+
+const currentPosition = function(){
+getPosition().then(responce => {
+    whereAmI(responce.coords.latitude,responce.coords.longitude);
+    })
+}
 
 
+
+//San Francisco, United States
+whereAmI('37.7749','-122.419');
+//Shanghai, China
+//whereAmI('31.224361','121.469170');
+currentPosition();
 
 
